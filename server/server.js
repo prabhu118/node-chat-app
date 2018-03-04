@@ -15,19 +15,25 @@ app.use(express.static(publicPath));
 io.on('connection',function(socket){
     console.log(`User connected with SOCKET ID : ${socket.id}` )
 
-    socket.emit('newUser',{
+    socket.emit('newMessage',{
         from : 'Admin',
-        txt : 'Welcome to chat app'
+        text : 'Welcome to chat app'
     });
 
-    socket.broadcast.emit('newUser',{
+    socket.broadcast.emit('newMessage',{
         from : 'Admin',
-        txt : 'New user joined'
+        text : 'New user joined'
     });
 
-    socket.on('newMessage',function(msg){
-        console.log('Message : '+ msg);
-        io.emit('newMessage',genMessage(msg.from,msg.text));
+    // socket.on('newMessage',function(msg){
+    //     console.log('Message : '+ msg);
+    //     io.emit('newMessage',genMessage(msg.from,msg.text));
+    // })
+
+    socket.on('createMessage',function(msg,callback){
+        console.log(msg)
+        io.emit('newMessage',{from:msg.from,text:msg.text});
+        callback('This is from server');
     })
 
     socket.on('disconnect',function(){
