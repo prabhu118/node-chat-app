@@ -9,13 +9,14 @@
 <body>
     <p>Welcome to Chat App</p>
 
+    <ol id="messages"></ol>
+
     <form id='message-form'>
         <input type="text" name="message" placeholder="message"/>
         <button type="submit">Send</button>
     </form>
+    <button id="send-loc">Send Location</button>
 
-    <ol id="messages"></ol>
-    
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/libs/jquery.min.js"></script>
     <script src="/js/socket.js"></script>
